@@ -1,0 +1,307 @@
+class Node{
+	String name;
+	Node link;
+	public Node(String name1) {
+		name=name1;
+		link=null;
+	}
+}
+
+class List{
+	Node head;
+	Node tail;
+	public void addLastNode(String name1) {
+		Node newNode = new Node(name1);
+		if(head==null) {
+			head=newNode;
+			tail=newNode;
+			return;
+		}
+		tail.link=newNode;
+		tail=newNode;
+	}
+	public void deleteLastNode() {
+		Node p,q;
+		p=null; q=head;
+		while(q.link!=null) {
+			p=q;
+			q=q.link;
+		}
+		p.link=null;
+	}
+	public void printList() {
+		Node p;
+		p=head;
+//		while(p!=null) {
+//			System.out.print(" "+p.name);
+//			p=p.link;
+//		}
+		for(p=head; p!=null; p=p.link) {
+			System.out.print(" "+p.name);
+		}
+		System.out.println();
+	}
+	public void addFirstNode(String name1) {
+		Node newNode = new Node(name1);
+		if(head==null) {
+			head=newNode;
+			tail=newNode;
+			newNode.link=head;
+			head=newNode;
+		}else {
+		newNode.link=head;
+		head=newNode;
+		}
+	}
+	public int countNode() {
+		Node p;
+		int count=0;
+		for(p=head; p!=null; p=p.link) {
+			count++;
+		}
+		return count;
+	}
+	public int countName(String name1) {
+		Node p;
+		int count=0;
+		for(p=head; p!=null; p=p.link) {
+			count++;
+			if(name1.equals(p.name)) {
+				return count;
+			}
+		}
+		System.out.println("name not found");
+		return 0;
+	}
+	public void kthElement(int num) {
+		Node p;
+		int count=0;
+		for(p=head; p!=null; p=p.link) {
+			count++;
+			if(num == count) {
+				System.out.println(p.name);
+			}
+	}
+	}
+	public void reverseList() {
+	    Node prev = null;
+	    Node current = head;
+	    Node next = null;
+	    while (current != null) {
+	        next = current.link;
+	        current.link = prev;
+	        prev = current;
+	        current = next;
+	    }
+	    head = prev;
+	}
+		public void reversePrint() {
+
+			Node prev = null;
+
+			Node current = head;
+
+			Node next = null;
+
+			while (current != null) {
+
+				next = current.link;
+
+				current.link = prev;
+
+				prev = current;
+
+				current = next;
+
+			}
+
+			head = prev; //renew head, ~reverseList
+
+			Node q = head;
+
+			while(q != null) {
+
+			System.out.print(q.name + "\n");
+
+			q = q.link;
+			}
+			}
+			
+		public void moveToFront() {
+
+		      Node temp = tail;
+
+		      tail = null;
+
+		      Node p = head;
+
+		      while (p.link != null && p.link != temp) {
+
+		         p = p.link;
+
+		      }
+
+		      p.link = null;
+
+		      temp.link = head;
+
+		      head = temp;
+		}
+		public void printMiddle() {
+
+			Node p;
+
+			Node q;
+
+			p=head;
+
+			q=head;
+
+
+			while(p!=null) {
+
+			p=p.link;
+
+			if(p!=null) {//p가 null값이 아닐 때
+
+			p=p.link;//p=p.link를 한 번 더 진헹
+
+			q=q.link;//q=q.link를 한 번 진행
+
+			}
+
+			}
+			
+			System.out.println("중간 원소는 "+q.name);
+
+			       }
+		
+		public void printKthFromLast(int k) {
+
+			Node m = head;
+
+			Node r = head;
+
+			int count = 0;
+
+			while (count < k) {
+
+			if (r == null) {
+
+			System.out.println("??");
+
+			return;
+
+			}
+
+			r = r.link;
+
+			count++;
+
+			}
+
+			while (r != null) {
+
+			m = m.link;
+
+			r = r.link;
+
+			}
+
+			System.out.println(m.name);
+
+			}
+		public void mergeLists(List list1, List list2) {
+
+			List mergedList = new List();
+
+
+
+			Node p = list1.head;
+
+			while (p != null) {
+
+			mergedList.addLastNode(p.name);
+
+			p = p.link;
+
+			}
+
+
+
+			Node q = list2.head;
+
+			while (q != null) {
+
+			mergedList.addLastNode(q.name);
+
+			q = q.link;
+
+			}
+
+			System.out.print("Merged List : ");
+
+			mergedList.printList();
+
+			}
+			public void replace(String x,String y) {
+
+			    Node p=head;
+
+			    while(p!=null) {
+
+			    if(p.name.equals(x)) {
+
+			        p.name=y;
+
+			    }
+
+			    p=p.link;
+
+			}
+			    
+
+			    
+
+}
+
+public class LinkedListMain {
+
+	public static void main(String[] args) {
+		List list1 = new List();
+		list1.addLastNode("Kim");
+		list1.addLastNode("Park");
+		list1.addLastNode("Lee");
+		list1.addLastNode("Choi");
+		list1.printList();
+		list1.deleteLastNode();
+		list1.printList();
+		list1.addFirstNode("Yoo");
+		list1.printList();
+		System.out.println("원소의 개수는 = " + list1.countNode());
+		System.out.println(list1.countName("Lee")+"번 원소");
+		list1.kthElement(1);
+		List list2 = new List();
+
+		list2.addLastNode("Sum");
+
+		list2.addLastNode("Mon");
+
+		list2.addLastNode("Tue");
+
+		list2.addLastNode("Wed");
+
+		list2.addLastNode("Thur");
+
+		list2.addLastNode("Fri");
+
+		list2.addLastNode("Sat");
+
+		list2.printList();
+
+		List list3 =new List();
+
+		list3.mergeLists(list1, list2);
+	}
+ }
+}

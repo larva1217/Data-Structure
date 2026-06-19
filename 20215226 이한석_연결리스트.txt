@@ -1,0 +1,105 @@
+class Node{
+	String name;
+	Node link;
+	public Node(String name1) {
+		name=name1;
+		link=null;
+	}
+}
+
+class List{
+	Node head;
+	Node tail;
+	public void addLastNode(String name1) {
+		Node newNode = new Node(name1);
+		if(head==null) {
+			head=newNode;
+			tail=newNode;
+			return;
+		}
+		tail.link=newNode;
+		tail=newNode;
+	}
+	public void deleteLastNode() {
+		Node p,q;
+		p=null; q=head;
+		while(q.link!=null) {
+			p=q;
+			q=q.link;
+		}
+		p.link=null;
+	}
+	public void printList() {
+		Node p;
+		p=head;
+//		while(p!=null) {
+//			System.out.print(" "+p.name);
+//			p=p.link;
+//		}
+		for(p=head; p!=null; p=p.link) {
+			System.out.print(" "+p.name);
+		}
+		System.out.println();
+	}
+	public void addFirstNode(String name1) {
+		Node newNode = new Node(name1);
+		if(head==null) {
+			head=newNode;
+			tail=newNode;
+			newNode.link=head;
+			head=newNode;
+		}else {
+		newNode.link=head;
+		head=newNode;
+		}
+	}
+	public int countNode() {
+		Node p;
+		int count=0;
+		for(p=head; p!=null; p=p.link) {
+			count++;
+		}
+		return count;
+	}
+	public int countName(String name1) {
+		Node p;
+		int count=0;
+		for(p=head; p!=null; p=p.link) {
+			count++;
+			if(name1.equals(p.name)) {
+				return count;
+			}
+		}
+		System.out.println("name not found");
+		return 0;
+	}
+	public void kthElement(int num) {
+		Node p;
+		int count=0;
+		for(p=head; p!=null; p=p.link) {
+			count++;
+			if(num == count) {
+				System.out.println(p.name);
+			}
+	}
+}
+
+public class LinkedListMain {
+
+	public static void main(String[] args) {
+		List list1 = new List();
+		list1.addLastNode("Kim");
+		list1.addLastNode("Park");
+		list1.addLastNode("Lee");
+		list1.addLastNode("Choi");
+		list1.printList();
+		list1.deleteLastNode();
+		list1.printList();
+		list1.addFirstNode("Yoo");
+		list1.printList();
+		System.out.println("원소의 개수는 = " + list1.countNode());
+		System.out.println(list1.countName("Lee")+"번 원소");
+		list1.kthElement(2);
+	}
+ }
+}
